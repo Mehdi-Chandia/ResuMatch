@@ -19,4 +19,16 @@ and also the file data eextracting was a bit headache using pdf-parse and mamont
 
 **In Progress:** landin page/hero section
 **Challenges:** It was simple styling nothing complex
+
+---
+
+### Day 3
+- Completed the signup and login pages
+- also integrated the APIs with both of the pages 
+- then moved to the creation of report-generate page where user will upload his details
+
+**In Progress:** generate report page
+**Challenges:** I was facing an error of status during API call from frontend
+- it was the page was redirecting me even after wrong credentials so it was a status error there was a typo error in backend status property
+
 ---

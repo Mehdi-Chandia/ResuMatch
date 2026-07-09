@@ -18,6 +18,7 @@ export const POST=asyncHandler(async (request)=>{
 
     await dbConnection();
     const {username, password, email}=body;
+
     const user=await UserModel.findOne({email})
     if(user){
         throw new ApiError(400,"User already exists");

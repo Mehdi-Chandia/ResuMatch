@@ -6,7 +6,7 @@ const asyncHandler=(fn)=> async (req,res,next)=>{
             success:false,
             message:err.message,
             status:err.status || 500,
-        },{statuse:err.status || 500})
+        },{status:err.status || 500})
     }
 }
 
