@@ -28,6 +28,16 @@ export const POST = asyncHandler(async (request) => {
 
     if (!file) throw new ApiError(400, "file is required");
 
+    const allowedTypes = [
+        "application/pdf",
+        "application/msword",
+        "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+    ];
+
+    if (!allowedTypes.includes(file.type)) {
+        throw new ApiError(400, "Only PDF, DOC, and DOCX files are allowed.");
+    }
+
     const buffer = Buffer.from(await file.arrayBuffer());
 
     let resumeText = "";
@@ -58,7 +68,7 @@ export const POST = asyncHandler(async (request) => {
         technicalQuestions:aiGeneratedData.technicalQuestions,
         behavioralQuestions:aiGeneratedData.behavioralQuestions,
         skillGap:aiGeneratedData.skillGap,
-        preparationalPlan:aiGeneratedData.preprationalPlan,
+        preparationalPlan:aiGeneratedData.preparationalPlan,
 
     })
 

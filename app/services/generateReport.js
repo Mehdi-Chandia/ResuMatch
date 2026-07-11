@@ -37,7 +37,7 @@ Return JSON in EXACTLY this shape:
   "skillGap": [
     { "skill": string, "severity": "low" | "medium" | "high" }
   ],
-  "preprationalPlan": [
+  "preparationalPlan": [
     { "day": number, "focus": string, "tasks": string[] }
   ]
 }
@@ -45,7 +45,7 @@ Return JSON in EXACTLY this shape:
 Rules:
 - Generate 4-6 technicalQuestions and 3-5 behavioralQuestions, tailored to gaps and the JD.
 - skillGap should list only skills required by the JD that are weak or missing in the resume.
-- preprationalPlan should be a realistic 5-7 day plan.
+- preparationalPlan should be a realistic 5-7 day plan.
 - severity must be exactly "low", "medium", or "high" — nothing else.
 `;
 

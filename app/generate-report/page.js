@@ -1,6 +1,55 @@
 "use client"
 
-const generateReport = () => {
+import {useRouter} from "next/dist/client/components/navigation";
+import {useForm} from "react-hook-form";
+import {useSession} from "next-auth/react";
+import {useEffect} from "react";
+
+const GenerateReport = () => {
+
+    const {data:session, status} = useSession();
+    const router = useRouter();
+
+    const {
+        register,
+        handleSubmit,
+        formState: { errors,isSubmitting },
+    } = useForm();
+
+    const onSubmit =async (data) => {
+        console.log(data);
+        const formData=new FormData()
+        formData.append("resume",data.resume[0])
+        formData.append("jobDescription",data.jobDescription)
+        formData.append("selfDescription",data.selfDescription)
+
+        try {
+            const response=await fetch("/api/report",{
+                method:"POST",
+                body:formData
+            })
+
+            const res=await response.json();
+            if (!response.ok){
+                throw new Error( res?.message || "Failed to save report")
+            }
+
+            console.log(res)
+            router.push("/dashboard")
+
+        }catch(err){
+            console.log(err)
+            alert(err.message)
+        }
+    }
+
+    useEffect(() => {
+        if (status ==="unauthenticated"){
+            router.push("/login")
+            alert("please login first")
+        }
+    }, [status]);
+
     return (
         <>
             <div className="bg-[#0A0E1A] h-screen flex flex-col justify-center items-center gap-4 p-4">
@@ -14,19 +63,54 @@ const generateReport = () => {
                     recommendations to improve your chances of getting hired.
                 </p>
 
-                <div className="mt-10 flex gap-6 bg-white/10 w-full max-w-3xl justify-center items-center rounded-2xl p-8">
+                <form onSubmit={handleSubmit(onSubmit)}
+                    className="mt-10 flex gap-8 bg-white/10 w-full max-w-3xl h-full justify-around items-center rounded-2xl p-8">
                     <div>
-                        <h3>Paste Job description</h3>
-                        <textarea className="w-40 h-40" placeholder="paste job description here"/>
+                        {/*job desc*/}
+                        <h3 className="text-[#10B981] text-xl font-bold">Paste Job description</h3>
+                        <p className="text-sm text-gray-400 mb-2">Paste the complete job description of the position you're applying for.</p>
+                        <textarea
+                            {...register("jobDescription", {required: {value:true, message:"Please enter job description"},
+                            minLength:{value:50, message:"Please enter atleast 50 characters"},
+                            })}
+                            className={`w-80 mt-4 h-60 outline-none border text-gray-400
+                          ${errors.jobDescription ? 'border-red-400' : 'border-[#10B981]'} p-4 rounded-md`} placeholder="paste job description here"/>
+                        {errors.jobDescription && (<p className="text-red-500 text-sm mt-1">{errors.jobDescription.message}</p>)}
                     </div>
+                    <div className="h-full w-0.5 bg-[#10B981]"></div>
                     <div>
-                        <p>Upload Resume</p>
-                        <p>Self description here</p>
+                        {/*resume upload*/}
+                        <p className="text-[#10B981] text-xl font-bold ">Upload Resume</p>
+                        <input
+                            accept=".pdf,.doc,.docx"
+                            {...register("resume",{required:"resume is required",})}
+                            className={`border ${errors.resume ? 'border-red-400' : 'border-gray-200'} 
+                            rounded-md mt-2 mb-2 p-2 text-gray-200`}
+                            type={"file"} placeholder={"add your resume"}/>
+                        {errors.resume && (<p className="text-red-500 text-sm mt-1">{errors.resume.message}</p>)}
+                        <p className="text-sm text-blue-400 mb-6">Only in PDF or DOCX format. <span className="text-gray-400">(Max 2MB file)</span></p>
+
+                        {/*self desc*/}
+                        <p className="text-gray-200 text-xl font-bold">Self description here</p>
+                        <p className="text-sm text-gray-400 mb-2">Tell us a little about yourself, your career goals, strengths, or the type of role you're targeting</p>
+                        <textarea
+                            {...register("selfDescription", {required: {value:true, message:"Please enter self description"},
+                                minLength:{value:50, message:"Please enter atleast 50 characters"},
+                            })}
+                            className={`w-80 mt-4 h-40 outline-none border text-gray-400
+                         ${errors.selfDescription ? 'border-red-400' : 'border-[#10B981]'} p-4 rounded-md`} placeholder="paste self description here"/>
+                        {errors.selfDescription && (<p className="text-red-500 text-sm mt-1">{errors.selfDescription.message}</p>)}
+
+                        <button onClick={()=> alert("AI is Analyzing wait until")} type={"submit"} className={`bg-[#10B981] text-white px-8 mt-6 py-4 rounded-md
+                        hover:bg-green-500 transition-all duration-200 ${isSubmitting ? 'cursor-not-allowed' : ''}`}>
+                            {isSubmitting ? 'Submitting...' : 'Submit'}
+                        </button>
                     </div>
-                </div>
+
+                </form>
 
             </div>
         </>
     )
 }
-export default generateReport;
+export default GenerateReport;

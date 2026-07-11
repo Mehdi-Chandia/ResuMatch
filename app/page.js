@@ -2,6 +2,7 @@
 
 import { Space_Grotesk, Inter, JetBrains_Mono } from "next/font/google"
 import { FaLongArrowAltRight } from "react-icons/fa"
+import {useRouter} from "next/dist/client/components/navigation";
 
 const display = Space_Grotesk({ subsets: ["latin"], weight: ["500", "700"], variable: "--font-display" })
 const body = Inter({ subsets: ["latin"], variable: "--font-body" })
@@ -26,6 +27,9 @@ const steps = [
 ]
 
 export default function Home() {
+
+    const router=useRouter();
+
     return (
         <div
             className={`${display.variable} ${body.variable} ${mono.variable} min-h-screen bg-[#0A0E1A] text-[#E8EAF0]`}
@@ -49,10 +53,10 @@ export default function Home() {
           What you <span className="text-[#10B981]">waiting</span> for
         </span>
                 <div className="flex gap-3">
-                    <button className="px-5 py-2 text-sm rounded-md text-[#E8EAF0] hover:bg-white/5 transition-colors">
+                    <button onClick={()=> router.push("/login")} className="px-5 py-2 text-sm rounded-md text-[#E8EAF0] hover:bg-white/5 transition-colors">
                         Log In
                     </button>
-                    <button className="px-5 py-2 text-sm rounded-md bg-[#4F46E5] hover:bg-[#4338CA] transition-colors">
+                    <button onClick={()=> router.push("/register")} className="px-5 py-2 text-sm rounded-md bg-[#4F46E5] hover:bg-[#4338CA] transition-colors">
                         Sign Up
                     </button>
                 </div>

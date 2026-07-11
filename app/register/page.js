@@ -113,10 +113,10 @@ const SignUp = () => {
                     <div className="mt-6">
                         <button
                             className={`w-full bg-[#10B981] text-white rounded-lg px-4 py-3 hover:bg-[#0DA271] 
-                            transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed`}
+                            transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed ${isSubmitting ? 'cursor-not-allowed' : ''}`}
                             type="submit"
                         >
-                            {isSubmitting ? 'Signing up' : 'Sign in'}
+                            {isSubmitting ? 'Signing up' : 'Sign Up'}
                         </button>
                     </div>
 

@@ -32,3 +32,15 @@ and also the file data eextracting was a bit headache using pdf-parse and mamont
 - it was the page was redirecting me even after wrong credentials so it was a status error there was a typo error in backend status property
 
 ---
+
+### Day 4
+- Just wrapped up the Generate report page of frontend 
+- Implemented the React Hook form for validation 
+- Integrated the API and tested its working
+- Added two more routes one to fetch all the reports and one to get report by its id
+- also added the checks so that only logged in user can access protected routes
+
+**In Progress:** Will move to dashboard now
+**Challenges:** I wouldn't say challenging or complex it was just the syntax of next js which is a bit differ from how we do in MERN so i made mistakes in syntax. 
+
+---
