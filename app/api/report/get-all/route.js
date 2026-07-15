@@ -8,16 +8,19 @@ import ApiError from "@/app/utils/apiError";
 
 export const GET=asyncHandler(async (request) => {
     const session=await getServerSession(authOptions);
+    console.log("session",session?.user);
+
     if(!session || !session.user.id){
         throw new ApiError(401, "Not authorized");
     }
 
     await dbConnection();
 
-    const Reports=await InterviewReportModel.find()
+    const Reports=await InterviewReportModel.find({user:session?.user?.id}).sort({createdAt:-1})
+    console.log(Reports)
 
     if(!Reports){
-        throw new ApiError(404, "No Reports Found");
+        throw new ApiError(404, "No Reports Found for logging in user");
     }
 
     return Response.json(

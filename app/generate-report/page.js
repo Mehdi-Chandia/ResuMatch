@@ -3,12 +3,16 @@
 import {useRouter} from "next/dist/client/components/navigation";
 import {useForm} from "react-hook-form";
 import {useSession} from "next-auth/react";
-import {useEffect} from "react";
+import {useEffect, useState} from "react";
+import { FaRobot } from "react-icons/fa";
 
 const GenerateReport = () => {
 
     const {data:session, status} = useSession();
+    const [isLoading,setIsLoading]=useState(false);
     const router = useRouter();
+
+    console.log("logged in user ",session?.user);
 
     const {
         register,
@@ -17,7 +21,8 @@ const GenerateReport = () => {
     } = useForm();
 
     const onSubmit =async (data) => {
-        console.log(data);
+        // console.log(data);
+        setIsLoading(true);
         const formData=new FormData()
         formData.append("resume",data.resume[0])
         formData.append("jobDescription",data.jobDescription)
@@ -40,6 +45,8 @@ const GenerateReport = () => {
         }catch(err){
             console.log(err)
             alert(err.message)
+        }finally {
+            setIsLoading(false);
         }
     }
 
@@ -49,6 +56,42 @@ const GenerateReport = () => {
             alert("please login first")
         }
     }, [status]);
+
+
+    if (isLoading) {
+        return (
+            <div className="fixed inset-0 bg-slate-950/95 flex flex-col justify-center items-center z-50">
+
+                {/* Animated Robot */}
+                <div className="animate-bounce text-emerald-400 text-7xl">
+                    <FaRobot />
+                </div>
+
+                {/* Heading */}
+                <h2 className="mt-8 text-3xl font-bold text-white">
+                    AI is analyzing your resume
+                </h2>
+
+                {/* Animated Dots */}
+                <div className="flex gap-3 mt-8">
+                    <span className="w-3 h-3 rounded-full bg-emerald-400 animate-bounce"></span>
+                    <span
+                        className="w-3 h-3 rounded-full bg-emerald-400 animate-bounce"
+                        style={{ animationDelay: "0.2s" }}
+                    ></span>
+                    <span
+                        className="w-3 h-3 rounded-full bg-emerald-400 animate-bounce"
+                        style={{ animationDelay: "0.4s" }}
+                    ></span>
+                </div>
+
+                <p className="mt-8 text-sm text-gray-500">
+                    This usually takes 10–20 seconds...
+                </p>
+
+            </div>
+        );
+    }
 
     return (
         <>
@@ -101,7 +144,7 @@ const GenerateReport = () => {
                          ${errors.selfDescription ? 'border-red-400' : 'border-[#10B981]'} p-4 rounded-md`} placeholder="paste self description here"/>
                         {errors.selfDescription && (<p className="text-red-500 text-sm mt-1">{errors.selfDescription.message}</p>)}
 
-                        <button onClick={()=> alert("AI is Analyzing wait until")} type={"submit"} className={`bg-[#10B981] text-white px-8 mt-6 py-4 rounded-md
+                        <button type={"submit"} className={`bg-[#10B981] text-white px-8 mt-6 py-4 rounded-md
                         hover:bg-green-500 transition-all duration-200 ${isSubmitting ? 'cursor-not-allowed' : ''}`}>
                             {isSubmitting ? 'Submitting...' : 'Submit'}
                         </button>

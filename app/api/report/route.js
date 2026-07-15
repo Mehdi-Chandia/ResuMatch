@@ -11,8 +11,12 @@ import {authOptions} from "@/app/api/auth/[...nextauth]/route";
 import dbConnection from "@/app/lib/mongodb";
 
 export const POST = asyncHandler(async (request) => {
-    // const session=await getServerSession(authOptions)
-    // console.log("logged in user ",session?.user)
+    const session=await getServerSession(authOptions)
+    console.log("logged in user ",session?.user)
+
+    if (!session || !session?.user?.id) {
+        throw new ApiError(401, "Not authorized");
+    }
 
     const formData = await request.formData();
 
@@ -69,6 +73,7 @@ export const POST = asyncHandler(async (request) => {
         behavioralQuestions:aiGeneratedData.behavioralQuestions,
         skillGap:aiGeneratedData.skillGap,
         preparationalPlan:aiGeneratedData.preparationalPlan,
+        user:session?.user?.id
 
     })
 

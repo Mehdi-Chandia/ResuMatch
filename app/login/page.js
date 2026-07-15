@@ -38,7 +38,7 @@ const Login = () => {
                 throw new Error("Something went wrong");
             }
             alert("Logged in successfully");
-            router.push("/")
+            router.push("/generate-report")
         }catch(err) {
             console.log(err);
             alert(err.message)

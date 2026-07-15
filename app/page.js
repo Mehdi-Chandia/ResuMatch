@@ -81,12 +81,12 @@ export default function Home() {
                         around your actual gaps — before a recruiter finds them for you.
                     </p>
                     <div className="flex flex-wrap items-center gap-4 mt-10">
-                        <button className="group px-7 py-3.5 rounded-md bg-[#10B981] hover:bg-[#0DA271] font-medium transition-colors flex items-center gap-2">
+                        <button onClick={()=> router.push("/generate-report")} className="group px-7 py-3.5 rounded-md bg-[#10B981] hover:bg-[#0DA271] font-medium transition-colors flex items-center gap-2">
                             Start Analyzing
                             <FaLongArrowAltRight className="group-hover:translate-x-1 transition-transform" />
                         </button>
-                        <button className="px-7 py-3.5 rounded-md border border-white/15 hover:bg-white/5 font-medium transition-colors">
-                            See a sample report
+                        <button onClick={()=> router.push("/dashboard")} className="px-7 py-3.5 rounded-md border border-white/15 hover:bg-white/5 font-medium transition-colors">
+                            View all your generated reports
                         </button>
                     </div>
                 </div>
@@ -166,7 +166,7 @@ export default function Home() {
                 >
                     Stop guessing why you're not getting callbacks.
                 </h2>
-                <button className="mt-8 px-8 py-4 rounded-md bg-[#4F46E5] hover:bg-[#4338CA] font-medium transition-colors">
+                <button onClick={()=> router.push("/generate-report")} className="mt-8 px-8 py-4 rounded-md bg-[#4F46E5] hover:bg-[#4338CA] font-medium transition-colors">
                     Analyze My Resume — Free
                 </button>
             </section>

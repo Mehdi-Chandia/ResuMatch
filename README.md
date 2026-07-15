@@ -44,3 +44,15 @@ and also the file data eextracting was a bit headache using pdf-parse and mamont
 **Challenges:** I wouldn't say challenging or complex it was just the syntax of next js which is a bit differ from how we do in MERN so i made mistakes in syntax. 
 
 ---
+
+### Day 5
+- Started with dashboard created its sidebar and righ section
+- fetched the generated report of only that login user
+- showed the report details with all the questions and prep plan
+- and few changes in the design and implementation
+
+**In Progress:** Will wrap up things tomorrow
+**Challenges:** There was one problem which became a headache for me it was some .next cache file ther was some problem in it and it was causing problems for me because the tailwind classes were not working
+properly because of that .next file the old CSS was cached in it or what but fixed it later.
+
+---

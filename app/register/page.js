@@ -32,7 +32,7 @@ const SignUp = () => {
                 body: JSON.stringify(data),
             })
             const res=await response.json();
-            console.log(response.status)
+            console.log(response)
             if (!response.ok) {
                 throw new Error( res?.message || "Error occured");
             }

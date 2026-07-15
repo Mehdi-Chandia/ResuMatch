@@ -8,7 +8,7 @@ export default function NavbarWrapper() {
 
     const pathname=usePathname();
 
-    if (["/login","/register","/generate-report"].includes(pathname)){
+    if (["/login","/register","/generate-report","/dashboard"].includes(pathname)){
         return null
     }else {
         return <Navbar/>
