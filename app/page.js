@@ -3,6 +3,8 @@
 import { Space_Grotesk, Inter, JetBrains_Mono } from "next/font/google"
 import { FaLongArrowAltRight } from "react-icons/fa"
 import {useRouter} from "next/dist/client/components/navigation";
+import ScoreGauge from "@/app/components/ScoreGauge";
+import {motion} from "framer-motion";
 
 const display = Space_Grotesk({ subsets: ["latin"], weight: ["500", "700"], variable: "--font-display" })
 const body = Inter({ subsets: ["latin"], variable: "--font-body" })
@@ -66,20 +68,31 @@ export default function Home() {
             <section className="relative max-w-7xl mx-auto px-8 pt-12 pb-24 grid md:grid-cols-2 gap-12 items-center">
                 <div>
                     <div className="inline-flex items-center gap-2 text-xs uppercase tracking-widest text-[#7C8699] border border-white/10 rounded-full px-3 py-1 mb-6">
-                        <span className="w-1.5 h-1.5 rounded-full bg-[#10B981]" />
+                        <span className="w-1.5 h-1.5 rounded-full bg-[#10B981] animate-pulse"  />
                         AI-powered resume analysis
                     </div>
-                    <h1
+
+                    <motion.h1
+                        initial={{opacity:0,y:-100}}
+                        animate={{opacity:1,y:0}}
+                        transition={{duration:1}}
+
                         className="text-5xl md:text-6xl font-bold leading-[1.05] tracking-tight"
                         style={{ fontFamily: "var(--font-display)" }}
                     >
-                        Know exactly where your resume falls short.
-                    </h1>
-                    <p className="text-[#7C8699] text-lg mt-6 max-w-lg leading-relaxed">
+                        Know exactly where your <span  className="text-[#10B981] animate-pulse text-6xl"  >Resume</span> falls short.
+                    </motion.h1>
+                    <motion.p
+                        initial={{opacity:0,y:100}}
+                        animate={{opacity:1,y:0}}
+                        transition={{duration:1,delay:1}}
+
+                        className="text-[#7C8699] text-lg mt-6 max-w-lg leading-relaxed">
                         Paste your resume and a job description. Get a real match score,
                         a breakdown of what's missing, and interview questions built
                         around your actual gaps — before a recruiter finds them for you.
-                    </p>
+                    </motion.p>
+
                     <div className="flex flex-wrap items-center gap-4 mt-10">
                         <button onClick={()=> router.push("/generate-report")} className="group px-7 py-3.5 rounded-md bg-[#10B981] hover:bg-[#0DA271] font-medium transition-colors flex items-center gap-2">
                             Start Analyzing
@@ -91,44 +104,9 @@ export default function Home() {
                     </div>
                 </div>
 
-                {/* signature element: live-looking score gauge */}
-                <div className="relative flex justify-center">
-                    <div className="relative w-72 h-72">
-                        <svg viewBox="0 0 200 200" className="w-full h-full -rotate-90">
-                            <circle cx="100" cy="100" r="86" fill="none" stroke="#1C2437" strokeWidth="14" />
-                            <circle
-                                cx="100"
-                                cy="100"
-                                r="86"
-                                fill="none"
-                                stroke="#10B981"
-                                strokeWidth="14"
-                                strokeLinecap="round"
-                                strokeDasharray={2 * Math.PI * 86}
-                                strokeDashoffset={2 * Math.PI * 86 * (1 - 0.82)}
-                            />
-                        </svg>
-                        <div className="absolute inset-0 flex flex-col items-center justify-center">
-              <span
-                  className="text-6xl font-bold"
-                  style={{ fontFamily: "var(--font-mono)" }}
-              >
-                82
-              </span>
-                            <span className="text-[#7C8699] text-sm mt-1 tracking-wide">Match Score</span>
-                        </div>
+                {/*score gauge section*/}
+                <ScoreGauge/>
 
-                        {/* floating context chips */}
-                        <div className="absolute -left-8 top-6 bg-[#131A2A] border border-white/10 rounded-lg px-3 py-2 text-xs shadow-lg">
-                            <span className="text-[#7C8699]">Keyword match</span>
-                            <div className="font-medium" style={{ fontFamily: "var(--font-mono)" }}>91%</div>
-                        </div>
-                        <div className="absolute -right-10 bottom-10 bg-[#131A2A] border border-white/10 rounded-lg px-3 py-2 text-xs shadow-lg">
-                            <span className="text-[#F59E0B]">Skill gap</span>
-                            <div className="font-medium">System design</div>
-                        </div>
-                    </div>
-                </div>
             </section>
 
             {/* HOW IT WORKS */}

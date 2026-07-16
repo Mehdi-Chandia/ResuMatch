@@ -56,3 +56,14 @@ and also the file data eextracting was a bit headache using pdf-parse and mamont
 properly because of that .next file the old CSS was cached in it or what but fixed it later.
 
 ---
+
+### Day 6
+- Today was the final day to wrap this app up and it is finally completed
+- added some new pages like about contact and a footer
+- Added a little bit animation with the help of claude AI
+- And a little bit more changes 
+
+**In Progress:** The app is almost complete but will see if there any changes needed
+**Challenges:** No challenges for today
+
+---

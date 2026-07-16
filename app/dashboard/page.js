@@ -150,7 +150,7 @@ const Dashboard = () => {
                     </button>
                 </div>
 
-                <h3 className="text-[#7C3AED] font-bold text-lg mb-4">Your Reports</h3>
+                <h3 className="text-gray-200 font-bold text-lg mb-4">Your Reports</h3>
 
                 {loading && <p className="text-gray-400">Loading...</p>}
 
@@ -182,18 +182,19 @@ const Dashboard = () => {
                 )}
 
                 <button
+                    onClick={()=> router.push("/")}
+                    className="mt-6 w-full bg-cyan-500 hover:bg-cyan-600 transition-all duration-200 text-white p-2 rounded-md"
+                >
+                    Home
+                </button>
+
+                <button
                     onClick={()=> router.push("/generate-report")}
                     className="mt-6 w-full bg-emerald-500 hover:bg-emerald-600 transition-all duration-200 text-white p-2 rounded-md"
                 >
                     Generate New
                 </button>
 
-                <button
-                    onClick={()=> router.push("/")}
-                    className="mt-6 w-full bg-cyan-500 hover:bg-cyan-600 transition-all duration-200 text-white p-2 rounded-md"
-                >
-                    Home
-                </button>
 
                 <button
                     onClick={logout}

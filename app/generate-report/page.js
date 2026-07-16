@@ -86,7 +86,7 @@ const GenerateReport = () => {
                 </div>
 
                 <p className="mt-8 text-sm text-gray-500">
-                    This usually takes 10–20 seconds...
+                    This usually takes 10–15 seconds...
                 </p>
 
             </div>
@@ -95,8 +95,8 @@ const GenerateReport = () => {
 
     return (
         <>
-            <div className="bg-[#0A0E1A] h-screen flex flex-col justify-center items-center gap-4 p-4">
-                <h1 className="text-5xl text-[#10B981] font-bold  text-center">
+            <div className="bg-[#0A0E1A] min-h-screen flex flex-col justify-center items-center gap-4 p-4 py-10">
+                <h1 className="text-3xl md:text-5xl text-[#10B981] font-bold  text-center">
                     Generate Your AI Resume Report
                 </h1>
 
@@ -107,28 +107,37 @@ const GenerateReport = () => {
                 </p>
 
                 <form onSubmit={handleSubmit(onSubmit)}
-                    className="mt-10 flex gap-8 bg-white/10 w-full max-w-3xl h-full justify-around items-center rounded-2xl p-8">
-                    <div>
+                      className="mt-10 flex flex-col md:flex-row gap-8 bg-white/10 w-full max-w-3xl h-full justify-around items-center md:items-stretch rounded-2xl p-4 md:p-8">
+
+                    <div className="w-full md:w-auto">
                         {/*job desc*/}
                         <h3 className="text-[#10B981] text-xl font-bold">Paste Job description</h3>
                         <p className="text-sm text-gray-400 mb-2">Paste the complete job description of the position you're applying for.</p>
                         <textarea
                             {...register("jobDescription", {required: {value:true, message:"Please enter job description"},
-                            minLength:{value:50, message:"Please enter atleast 50 characters"},
+                                minLength:{value:50, message:"Please enter atleast 50 characters"},
                             })}
-                            className={`w-80 mt-4 h-60 outline-none border text-gray-400
+                            className={`w-full md:w-80 mt-4 h-60 outline-none border text-gray-400
                           ${errors.jobDescription ? 'border-red-400' : 'border-[#10B981]'} p-4 rounded-md`} placeholder="paste job description here"/>
                         {errors.jobDescription && (<p className="text-red-500 text-sm mt-1">{errors.jobDescription.message}</p>)}
                     </div>
-                    <div className="h-full w-0.5 bg-[#10B981]"></div>
-                    <div>
+
+                    <div className="hidden md:block h-full w-0.5 bg-[#10B981]"></div>
+
+                    <div className="w-full md:w-auto">
                         {/*resume upload*/}
                         <p className="text-[#10B981] text-xl font-bold ">Upload Resume</p>
                         <input
                             accept=".pdf,.doc,.docx"
-                            {...register("resume",{required:"resume is required",})}
+                            {...register("resume",{required:"resume is required",
+                                validate: {
+                                    fileSize: (files) =>
+                                        files[0]?.size <= 2 * 1024 * 1024 ||
+                                        "File size must be less than 2MB",
+                                },
+                            })}
                             className={`border ${errors.resume ? 'border-red-400' : 'border-gray-200'} 
-                            rounded-md mt-2 mb-2 p-2 text-gray-200`}
+                            rounded-md mt-2 mb-2 p-2 text-gray-200 w-full`}
                             type={"file"} placeholder={"add your resume"}/>
                         {errors.resume && (<p className="text-red-500 text-sm mt-1">{errors.resume.message}</p>)}
                         <p className="text-sm text-blue-400 mb-6">Only in PDF or DOCX format. <span className="text-gray-400">(Max 2MB file)</span></p>
@@ -140,11 +149,11 @@ const GenerateReport = () => {
                             {...register("selfDescription", {required: {value:true, message:"Please enter self description"},
                                 minLength:{value:50, message:"Please enter atleast 50 characters"},
                             })}
-                            className={`w-80 mt-4 h-40 outline-none border text-gray-400
+                            className={`w-full md:w-80 mt-4 h-40 outline-none border text-gray-400
                          ${errors.selfDescription ? 'border-red-400' : 'border-[#10B981]'} p-4 rounded-md`} placeholder="paste self description here"/>
                         {errors.selfDescription && (<p className="text-red-500 text-sm mt-1">{errors.selfDescription.message}</p>)}
 
-                        <button type={"submit"} className={`bg-[#10B981] text-white px-8 mt-6 py-4 rounded-md
+                        <button type={"submit"} className={`bg-[#10B981] text-white px-8 mt-6 py-4 rounded-md w-full md:w-auto
                         hover:bg-green-500 transition-all duration-200 ${isSubmitting ? 'cursor-not-allowed' : ''}`}>
                             {isSubmitting ? 'Submitting...' : 'Submit'}
                         </button>

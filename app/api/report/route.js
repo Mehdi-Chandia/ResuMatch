@@ -42,6 +42,12 @@ export const POST = asyncHandler(async (request) => {
         throw new ApiError(400, "Only PDF, DOC, and DOCX files are allowed.");
     }
 
+    const MAX_SIZE = 2 * 1024 * 1024;
+
+    if (file.size > MAX_SIZE) {
+        throw new ApiError(400, "Resume size must be less than 2MB");
+    }
+
     const buffer = Buffer.from(await file.arrayBuffer());
 
     let resumeText = "";

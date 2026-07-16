@@ -21,9 +21,9 @@ const Navbar = () => {
             </div>
             <ul className="md:flex hidden gap-8 items-center">
               <Link className="hover:text-blue-500  " href={"/"}>  <li>Home</li> </Link>
-                <Link className="hover:text-blue-500" href={"/"}> <li>About</li> </Link>
-                <Link className="hover:text-blue-500" href={"/"}><li>Contact Us</li> </Link>
-                <Link className="hover:text-blue-500" href={"/"}> <li>Services</li> </Link>
+                <Link className="hover:text-blue-500" href={"/about"}> <li>About</li> </Link>
+                <Link className="hover:text-blue-500" href={"/contact"}><li>Contact Us</li> </Link>
+                <Link className="hover:text-blue-500" href={"/dashboard"}> <li>Dashboard</li> </Link>
             </ul>
          <span onClick={()=> setIsOpen(!isOpen)} className="md:hidden block"> {isOpen ? (<BiSolidXCircle />) : ( <IoMdMenu />)} </span>
         </div>
@@ -32,9 +32,9 @@ const Navbar = () => {
                 <div className="bg-[#10B981] h-45 p-2 mt-2 rounded-md text-white md:hidden ">
                     <ul className="flex flex-col gap-5 items-center p-2">
                         <Link onClick={()=> setIsOpen(!isOpen)} className="hover:text-blue-500" href={"/"}>  <li>Home</li> </Link>
-                        <Link onClick={()=> setIsOpen(!isOpen)} className="hover:text-blue-500" href={"/"}> <li>About</li> </Link>
-                        <Link onClick={()=> setIsOpen(!isOpen)} className="hover:text-blue-500" href={"/"}><li>Contact Us</li> </Link>
-                        <Link onClick={()=> setIsOpen(!isOpen)} className="hover:text-blue-500" href={"/"}> <li>Services</li> </Link>
+                        <Link onClick={()=> setIsOpen(!isOpen)} className="hover:text-blue-500" href={"/about"}> <li>About</li> </Link>
+                        <Link onClick={()=> setIsOpen(!isOpen)} className="hover:text-blue-500" href={"/contact"}><li>Contact Us</li> </Link>
+                        <Link onClick={()=> setIsOpen(!isOpen)} className="hover:text-blue-500" href={"/dashboard"}> <li>Dashboard</li> </Link>
                     </ul>
                 </div>
             )}
