@@ -94,7 +94,7 @@ const SignUp = () => {
                     <div className="mt-4">
                         <label className="block font-semibold text-[#E8EAF0] mb-1">Password</label>
                         <input
-                            className={`w-full focus:outline-none border px-3 py-2 rounded-lg bg-[#0A0E1A] text-[#E8EAF0] placeholder:text-[#7C8699]/60 ${
+                            className={`w-full relative focus:outline-none border px-3 py-2 rounded-lg bg-[#0A0E1A] text-[#E8EAF0] placeholder:text-[#7C8699]/60 ${
                                 errors.password ? "border-red-500" : "border-white/10"
                             }`}
                             type={showPassword ? 'text' : 'password'}

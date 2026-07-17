@@ -11,6 +11,7 @@ import { FaComments } from "react-icons/fa6";
 import { FaClipboardList } from "react-icons/fa";
 import { MdOutlineSportsScore } from "react-icons/md";
 import { FaFileAlt } from "react-icons/fa";
+import Link from "next/link";
 
 
 const Dashboard = () => {
@@ -23,7 +24,6 @@ const Dashboard = () => {
     const [sidebarOpen, setSidebarOpen] = useState(false);
     const [showReport, setShowReport] = useState(null);
 
-    // one boolean per collapsible section, so each opens/closes independently
     const [showTechQuestions, setShowTechQuestions] = useState(false);
     const [showBehavioralQuestions, setShowBehavioralQuestions] = useState(false);
     const [showPrepPlan, setShowPrepPlan] = useState(false);
@@ -45,7 +45,7 @@ const Dashboard = () => {
             }
 
             setReports(data.data);
-            console.log(data.data);
+            // console.log(data.data);
             if (data.data.length > 0) {
                 setShowReport(data.data[0]);
             }
@@ -124,9 +124,9 @@ const Dashboard = () => {
     return (
         <div className="min-h-screen bg-slate-800 relative md:flex">
 
-            {/* top bar, mobile only. holds the hamburger button */}
+            {/* top bar mobile only */}
             <div className="md:hidden flex items-center justify-between bg-slate-900 p-4">
-                <p className="text-white font-bold">Resu<span className="text-emerald-400">Match</span></p>
+                <Link href={"/"} className="text-white font-bold">Resu<span className="text-emerald-400">Match</span></Link>
                 <button onClick={() => setSidebarOpen(true)}>
                     <IoMdMenu className="text-white w-7 h-7" />
                 </button>
@@ -220,8 +220,9 @@ const Dashboard = () => {
                         {/* title + score */}
                         <div className="flex flex-col md:flex-row gap-4 justify-between items-start md:items-center p-4 rounded-md">
                             <div className="">
-                                <h3 className="text-slate-400 font-bold text-4xl mb-2">Welcome Back!<span className="text-white"> {session?.user?.username} </span></h3>
+                                <h3 className="text-slate-400 font-bold text-4xl mb-2">Welcome!<span className="text-white"> {session?.user?.username} </span></h3>
                                  <div className="border-emerald-200 rounded-md p-3 border">
+                                     <label className="text-gray-300">Title</label>
                                 <p className="text-3xl font-bold text-emerald-500">{showReport.title}</p>
                                 <p className="text-gray-400 text-sm">
                                     {new Date(showReport.createdAt).toLocaleDateString()}
@@ -255,7 +256,7 @@ const Dashboard = () => {
                             </div>
                         </div>
 
-                        {/* skill gaps, centered, not full width */}
+                        {/* skill gaps */}
                         <div className="mt-6 max-w-2xl mx-auto">
                             <h3 className="text-gray-300 text-xl font-bold mb-3 text-center">Skill Gaps <span className="inline-block"><FaChartColumn/> </span></h3>
                             <div className="flex flex-col gap-3">
@@ -277,7 +278,7 @@ const Dashboard = () => {
                             </div>
                         </div>
 
-                        {/* technical questions, collapsible */}
+                        {/* technical questions */}
                         <div className="mt-6 bg-slate-900 rounded-md p-4">
                             <div
                                 onClick={() => setShowTechQuestions(!showTechQuestions)}
@@ -295,7 +296,7 @@ const Dashboard = () => {
                                 <div className="mt-3 flex flex-col gap-4">
                                     {showReport.technicalQuestions?.map((q) => (
                                         <div key={q._id} className="border-t border-gray-700 pt-3">
-                                            <p className="text-white font-bold"> <span className="text-red-500">Q.</span> {q.question}</p>
+                                            <p className="text-white font-bold"> <span className="text-red-500 text-xl">Q.</span> {q.question}</p>
                                             <p className="text-gray-400 text-sm mt-1"> <span className="text-blue-400">Why it's asked:</span> {q.intention}</p>
                                             <p className="text-emerald-400 text-sm mt-1"> <span className="text-yellow-400">Prep answer:</span> {q.answer}</p>
                                         </div>
@@ -304,7 +305,7 @@ const Dashboard = () => {
                             )}
                         </div>
 
-                        {/* behavioral questions, collapsible */}
+                        {/* behavioral questions */}
                         <div className="mt-4 bg-slate-900 rounded-md p-4">
                             <div
                                 onClick={() => setShowBehavioralQuestions(!showBehavioralQuestions)}
@@ -322,7 +323,7 @@ const Dashboard = () => {
                                 <div className="mt-3 flex flex-col gap-4">
                                     {showReport.behavioralQuestions?.map((q) => (
                                         <div key={q._id} className="border-t border-gray-700 pt-3">
-                                            <p className="text-white font-bold"> <span className="text-red-500">Q: </span> {q.question}</p>
+                                            <p className="text-white font-bold"> <span className="text-red-500 text-xl">Q: </span> {q.question}</p>
                                             <p className="text-gray-400 text-sm mt-1"> <span className="text-blue-400">Why it's asked:</span> {q.intention}</p>
                                             <p className="text-emerald-400 text-sm mt-1"> <span className="text-yellow-500">Prep answer:</span> {q.answer}</p>
                                         </div>
@@ -350,7 +351,7 @@ const Dashboard = () => {
                                     {showReport.preparationalPlan?.map((step) => (
                                         <div key={step._id} className="border-t border-gray-700 pt-2">
                                             <p className="text-white font-bold">
-                                              <span className="text-cyan-500"> Day {step.day}: </span> <span className="text-emerald-400">{step.focus}</span>
+                                              <span className="text-gray-200"> Day {step.day}: </span> <span className="text-emerald-400">{step.focus}</span>
                                             </p>
                                             <ul className="mt-1 ml-4 list-disc">
                                                 {step.tasks?.map((task, i) => (

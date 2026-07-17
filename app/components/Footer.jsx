@@ -17,14 +17,14 @@ const Footer = () => {
                 <div className="flex gap-16">
                     <div>
                         <h4 className="text-white font-bold mb-3">Product</h4>
-                        <ul className="flex flex-col gap-2 text-gray-400 text-sm">
+                        <ul className="flex flex-col gap-4 text-gray-400 text-sm p-2">
                             <li><Link href="/dashboard" className="hover:text-[#10B981]">Dashboard</Link></li>
-                            <li><Link href="/generate" className="hover:text-[#10B981]">Generate Report</Link></li>
+                            <li><Link href="/generate-report" className="hover:text-[#10B981]">Generate Report</Link></li>
                         </ul>
                     </div>
                     <div>
                         <h4 className="text-white font-bold mb-3">Company</h4>
-                        <ul className="flex flex-col gap-2 text-gray-400 text-sm">
+                        <ul className="flex flex-col gap-2 text-gray-400 text-sm p-2">
                             <li><a href="/about" className="hover:text-[#10B981]">About</a></li>
                             <li><a href="/contact" className="hover:text-[#10B981]">Contact</a></li>
                         </ul>
