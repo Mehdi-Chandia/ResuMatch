@@ -5,6 +5,8 @@ import { FaLongArrowAltRight } from "react-icons/fa"
 import {useRouter} from "next/dist/client/components/navigation";
 import ScoreGauge from "@/app/components/ScoreGauge";
 import {motion} from "framer-motion";
+import {useEffect} from "react";
+import {toast} from "react-toastify";
 
 const display = Space_Grotesk({ subsets: ["latin"], weight: ["500", "700"], variable: "--font-display" })
 const body = Inter({ subsets: ["latin"], variable: "--font-body" })
@@ -31,6 +33,10 @@ const steps = [
 export default function Home() {
 
     const router=useRouter();
+
+    useEffect(() => {
+        toast("welcome to ResuMatch!")
+    }, []);
 
     return (
         <div

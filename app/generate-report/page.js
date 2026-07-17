@@ -5,6 +5,7 @@ import {useForm} from "react-hook-form";
 import {useSession} from "next-auth/react";
 import {useEffect, useState} from "react";
 import { FaRobot } from "react-icons/fa";
+import {toast} from "react-toastify";
 
 const GenerateReport = () => {
 
@@ -44,7 +45,7 @@ const GenerateReport = () => {
 
         }catch(err){
             console.log(err)
-            alert(err.message)
+            toast.error(err.message)
         }finally {
             setIsLoading(false);
         }

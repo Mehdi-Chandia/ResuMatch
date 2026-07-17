@@ -12,6 +12,7 @@ import { FaClipboardList } from "react-icons/fa";
 import { MdOutlineSportsScore } from "react-icons/md";
 import { FaFileAlt } from "react-icons/fa";
 import Link from "next/link";
+import {toast} from "react-toastify";
 
 
 const Dashboard = () => {
@@ -51,7 +52,7 @@ const Dashboard = () => {
             }
         } catch (err) {
             console.log(err.message);
-            alert(err.message);
+            toast.error(err.message);
         } finally {
             setLoading(false);
         }
@@ -60,7 +61,7 @@ const Dashboard = () => {
     const logout = async () => {
         try {
             signOut("credentials", {redirect: false});
-            alert("Logged out successfully");
+            toast.success("Logged out successfully");
             router.push("/login");
         } catch (err) {
             console.log(err.message);
@@ -78,7 +79,7 @@ const Dashboard = () => {
     useEffect(() => {
         if (status === "unauthenticated"){
             router.push("/login");
-            alert("Please log in first");
+            toast.error("Please log in first");
         }
     }, [status]);
 

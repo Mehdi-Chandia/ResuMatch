@@ -3,6 +3,7 @@ import "./globals.css";
 import NavbarWrapper from "@/app/components/NavbarWrapper";
 import SessionWrapper from "@/app/components/SessionWrapper";
 import Footer from "@/app/components/Footer";
+import ToastProvider from "@/app/components/ToastProvider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -28,6 +29,7 @@ export default function RootLayout({ children }) {
       <body className="min-h-full flex flex-col">
       <SessionWrapper>
       <NavbarWrapper/>
+        <ToastProvider/>
       {children}
         <Footer/>
       </SessionWrapper>

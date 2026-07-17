@@ -16,7 +16,6 @@ const ScoreGauge = ({ score = 82, keywordMatch = 91, skillGap = "System design" 
 
             const step = (now) => {
                 const progress = Math.min((now - start) / duration, 1);
-                // ease-out curve so it starts fast and settles gently
                 const eased = 1 - Math.pow(1 - progress, 3);
                 setAnimatedScore(Math.round(eased * score));
                 if (progress < 1) requestAnimationFrame(step);

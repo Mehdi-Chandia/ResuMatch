@@ -6,6 +6,7 @@ import {useRouter} from "next/dist/client/components/navigation";
 import {useState} from "react";
 import { IoMdEye } from "react-icons/io";
 import { IoMdEyeOff } from "react-icons/io";
+import {toast} from "react-toastify";
 
 const SignUp = () => {
     const [showPassword, setShowPassword]=useState(false);
@@ -38,12 +39,12 @@ const SignUp = () => {
             }
 
             console.log(res);
-            alert(res.message)
+            toast.success(res.message)
 
             router.push("/login");
         }catch(err) {
             console.log(err.message);
-            alert(err.message)
+            toast.error(err.message)
         }
     };
 
@@ -101,7 +102,7 @@ const SignUp = () => {
                             {...register("password", { required: "Password is required" })}
                             placeholder="Enter your password"
                         />
-                        <span className={"absolute invert right-134 p-3"} onClick={()=> setShowPassword(!showPassword)}>
+                        <span className={"absolute invert right-128 p-3"} onClick={()=> setShowPassword(!showPassword)}>
                              {showPassword ? <IoMdEye />  : <IoMdEyeOff /> }
                         </span>
                         {errors.password && (
