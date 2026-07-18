@@ -179,7 +179,12 @@ const Dashboard = () => {
                         </div>
                     ))
                 ) : (
-                    !loading && <p className="text-gray-400">No reports to show yet!</p>
+                    !loading && <div className="space-y-3"> <p className="text-gray-400">No reports to show yet!</p>  <button
+                        onClick={()=> router.push("/generate-report")}
+                        className="mt-6 w-full bg-emerald-500 hover:bg-emerald-600 transition-all duration-200 text-white p-2 rounded-md"
+                    >
+                        Generate New
+                    </button></div>
                 )}
 
                 <button
